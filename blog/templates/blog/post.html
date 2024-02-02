@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{post.title}}
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center">{{post.title}}</h1>
+{% if post.image.url != null %} 
+<img src="{{post.image.url}}" alt="{{post.title}}">
+{% endif %}
+<hr>
+<p>{{post.content}}</p>
+<br>
+<b>{{post.pro}}</b>
+<br>
+<h4>fikringizni qoldiring</h4>
+<p>Fikrlar: {{post.comment_set.count}}</p>
+<hr>
+{% if user.is_authenticated %}
+<form action="{% url 'comment' post.id %}"method="POST">
+    {% csrf_token %}
+    <textarea name="text" cols="form-control"></textarea>
+    <p class="text-right">
+        <br>
+        <button class="btn btn-primary">Yuborish</button>
+    </p>
+</form>
+{% else %}
+<p>Kommentariya qoldirish uchun  <a href="{% url 'register' %}">registratsiya qiling </a>
+yoki
+<a href="{% url 'login' %}">kiring</a>
+</p>
+{% endif %}
+<hr>
+{% for comment in post.comment_set.all %}
+<div class="col-md-12">
+   <h3>{{comment.user.username}}</h3>
+   <p>{{comment.text}}</p>
+   <p class="text-right">{{comment.date|timesince}} oldin</p>
+</div>
+
+{% endfor %}
+
+
+<b style="float: right;">{{post.date}}</b>
+{% endblock %}

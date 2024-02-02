@@ -1,0 +1,25 @@
+
+{% extends 'base.html' %}
+{% block title %}
+registratsiya
+{% endblock %}
+
+
+{% block content %}
+
+
+<form style="padding: 5px;" action="{% url 'register' %}" method="POST">
+    {% csrf_token %}
+    <label class="user1" for="">{{form.username.label}}</label>
+    <span class="input">{{form.first_name}}</span>
+    <span class="input">{{form.last_name}}</span>
+    <span class="input">{{form.username}}</span>
+    <span class="input">{{form.email}}</span>
+    <span class="input">{{form.password}}</span>
+    <span class="input">{{form.password2}}</span>
+
+    <button class="button-registor">Ro'yxatdan o'tish</button>
+    <button class="button-registor1"style="margin-top: 10px;" ><a href="{% url 'login' %}">Login</a></button>
+    <button class="button-registor2"style="margin-top: 10px;" ><a href="{% url 'index' %}">Asosiy sahifa</a></button>
+</form>
+{% endblock %}
