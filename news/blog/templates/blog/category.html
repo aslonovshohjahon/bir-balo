@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}
+Kategoriya
+{% endblock %}
+
+
+{% block content %}
+{% for category in categories %}
+<h1 class="text-center">{{category.title}}</h1> 
+{% endfor %}
+<hr>
+
+
+<div class="cantiener">
+    <div class="row">
+        {% for post in posts %}
+        <div class="col-md-4">
+            <div class="card">
+                {% if post.image.url != null %}
+                <img src="{{post.image.url}}" alt="{{post.title}}" style="width: 389px; height: 280px;" class="card-img-top">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="carg-title">{{post.title}}</h5>
+                    <p class="card-text">{{post.content}}</p>
+                    <a href="" class="btn-primary">Batafsil ma'lumot</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+search 
+{% endblock %}
+
+{% block content %}
+<div class="contain">
+    <div class="row">
+        {% for post in search_obj %}
+        <div class="col-md-4">
+            <div class="card">
+                {% if post.image.url != null %}
+                <img src="{{post.image.url}}" style="width: 380px; height: 300px;" alt="">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title"> {{post.title}}<h5>
+                        <p class="card-text"> {{post.content}}</p>
+                    <a href="{% url 'post' post.id %}" class="btn btn-primary">Batafsil ma'lumot</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <h2 class="text-center">Hech narsa topilmadi.</h2>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
